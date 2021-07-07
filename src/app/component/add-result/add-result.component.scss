@@ -1,0 +1,20 @@
+.container{
+  height: auto;
+
+  mat-form-field{
+    width: 70%;
+    input,
+    input:hover,
+    input:focus,
+    input:active  {
+      //background-color: #454545;
+    }
+
+  }
+  button{
+    width: 350px;
+  }
+}
+.success{}
+.failed{}
+.loading{}

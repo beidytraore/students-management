@@ -1,0 +1,23 @@
+.toolbar{
+  padding: 0px;
+  margin: 0px;
+
+  .divider{
+    flex: 1 1 0;
+  }
+}
+.dashboard {
+  padding: 0px;
+  margin: 0px;
+  height: 100%;
+  .sidenav{
+    height: 100%;
+    background-color: azure;
+    width: 200px;
+  }
+  .main-content{
+    height: 100%;
+    background-color: azure;
+    padding: 4%;
+  }
+}

@@ -1,0 +1,103 @@
+<div class="container" *ngIf="(!isLoading && students.length != 0)">
+  <h1 align="center">Table de tout les étudiants</h1>
+  <mat-divider></mat-divider>
+  <br>
+ <table
+   mat-table
+   [dataSource]="students"
+   class="mat-elevation-z2"
+   mat-ripple
+   [matRippleUnbounded]="rippleUnbounded"
+   [matRippleRadius]="rippleRadius"
+ >
+<!--   ID column-->
+   <ng-container matColumnDef="id">
+     <th mat-header-cell *matHeaderCellDef>ID</th>
+     <td mat-cell *matCellDef="let student">{{student.id}}</td>
+   </ng-container>
+
+<!--   Name column-->
+   <ng-container matColumnDef="name">
+     <th mat-header-cell *matHeaderCellDef>Nom</th>
+     <td mat-cell *matCellDef="let student">{{student.name}}</td>
+   </ng-container>
+
+<!--   Roll column-->
+   <ng-container matColumnDef="roll">
+     <th mat-header-cell *matHeaderCellDef>Rôle</th>
+     <td mat-cell *matCellDef="let student">{{student.roll}}</td>
+   </ng-container>
+
+<!--   Reg column-->
+   <ng-container matColumnDef="reg">
+     <th mat-header-cell *matHeaderCellDef>Reg</th>
+     <td mat-cell *matCellDef="let student">{{student.reg}}</td>
+   </ng-container>
+
+<!--   Email column-->
+   <ng-container matColumnDef="email">
+     <th mat-header-cell *matHeaderCellDef>Email</th>
+     <td mat-cell *matCellDef="let student">{{student.email}}</td>
+   </ng-container>
+
+<!--   Department column-->
+   <ng-container matColumnDef="department">
+     <th mat-header-cell *matHeaderCellDef>Departement</th>
+     <td mat-cell *matCellDef="let student">{{student.department}}</td>
+   </ng-container>
+
+<!--   Semester column-->
+   <ng-container matColumnDef="semester">
+     <th mat-header-cell *matHeaderCellDef>Semestre</th>
+     <td mat-cell *matCellDef="let student">{{student.semester}}</td>
+   </ng-container>
+
+<!--   edit column-->
+   <ng-container matColumnDef="edit">
+     <th mat-header-cell *matHeaderCellDef>Editer</th>
+     <td mat-cell *matCellDef="let student">
+       <button
+         mat-button
+         color="accent"
+         (click)="goToEditPage(student.id)"
+       >Editer</button>
+     </td>
+   </ng-container>
+
+<!--   delete column-->
+   <ng-container matColumnDef="delete">
+     <th mat-header-cell *matHeaderCellDef>Supprimer</th>
+     <td mat-cell *matCellDef="let student">
+       <button
+         mat-raised-button
+         color="warn"
+         (click)="deleteStudent(student.id)">
+         Supprimer
+       </button>
+     </td>
+   </ng-container>
+
+
+   <tr mat-header-row *matHeaderRowDef="studentColumns;"></tr>
+   <tr mat-row *matRowDef="let row; columns: studentColumns;"></tr>
+
+
+ </table>
+  <br><br><br><br>
+  <br><br><br><br>
+</div>
+<div class="empty" *ngIf="(students.length == 0 && !isLoading)">
+  <br><br><br><br>
+  <h1 align="center">La base de données des étudiants est vide!!</h1>
+  <br><br>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="reload()">
+    Recharger
+  </button>
+</div>
+<div class="loading" *ngIf="isLoading">
+  <br><br><br>
+  <mat-spinner color="primary"></mat-spinner>
+</div>

@@ -1,0 +1,80 @@
+<div class="container" *ngIf="!isSubmitted">
+  <h1>Enter your info</h1>
+  <mat-divider></mat-divider>
+  <br><br>
+  <form [formGroup]="searchStudentForm">
+<!--    roll-->
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your roll no</mat-label>
+      <input
+        type="number"
+        name="roll"
+        matInput
+        formControlName="roll"
+        placeholder="roll no"
+        />
+      <mat-error *ngIf="roll && roll.invalid && roll.touched">
+        <span *ngIf="roll.hasError('required')">rôle n° réquis</span>
+        <span *ngIf="roll.hasError('min')">minimum 6 caracteres réquis</span>
+        <span *ngIf="roll.hasError('max')">maximum 10 caracteres réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    reg-->
+    <mat-form-field appearance="fill">
+      <mat-label>Veuillez saisir votre reg n°</mat-label>
+      <input
+        type="number"
+        name="reg"
+        matInput
+        formControlName="reg"
+        placeholder="reg n°"
+      />
+      <mat-error *ngIf="reg && reg.invalid && reg.touched">
+        <span *ngIf="reg.hasError('required')">reg n° réquis</span>
+        <span *ngIf="reg.hasError('min')">minimum 6 caracteres réquis</span>
+        <span *ngIf="reg.hasError('max')">maximum 10 caracteres réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    submit-->
+    <button
+      mat-raised-button
+      [disabled]="searchStudentForm.invalid"
+      (click)="onSubmit(searchStudentForm.value)"
+      color="primary"
+      >Recherche</button>
+  </form>
+</div>
+<div class="failed" *ngIf="isFailed && isSubmitted && feedbackMessage">
+  <h1 align="center">Recherche d'etudiant echouer!</h1>
+  <h1 align="center">{{feedbackMessage}}</h1>
+  <mat-divider></mat-divider>
+  <br><br>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="refreshPage()">
+ Réessayer encore
+  </button>
+</div>
+<div class="success" *ngIf="isSucceed && student">
+  <h1 align="center">Profile d'etudiant</h1>
+  <mat-divider></mat-divider>
+  <br><br>
+  <h1>Nom: {{student?.name}}</h1>
+  <h1>Rôle: {{student?.roll}}</h1>
+  <h1>Reg: {{student?.reg}}</h1>
+  <h1>Email: {{student?.email}}</h1>
+  <h1>Departement: {{student?.department}}</h1>
+  <h1>Semestre: {{student?.semester}}</h1>
+  <br><br>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="refreshPage()">
+    Réessayer
+  </button>
+</div>

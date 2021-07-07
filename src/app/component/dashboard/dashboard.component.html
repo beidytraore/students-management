@@ -1,0 +1,23 @@
+<mat-toolbar color="primary" class="toolbar">
+  <button mat-icon-button>
+    <mat-icon (click)="toogleSidenav()">Menu</mat-icon>
+  </button>
+  <span>Etudiants MS</span>
+  <span class="divider"></span>
+  <button mat-icon-button>
+    <mat-icon>favories</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon>Partager</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-drawer-container class="dashboard">
+  <mat-drawer mode="side" [opened]="sidenavOpened" class="sidenav">
+    <mat-nav-list *ngFor="let nlink of navLinkList | keyvalue">
+      <a mat-list-item routerLink="{{nlink.value.link}}">{{nlink.value.title}}</a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="main-content">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

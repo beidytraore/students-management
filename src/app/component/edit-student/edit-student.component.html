@@ -1,0 +1,164 @@
+<div class="container" *ngIf="studentId && student && !isLoading">
+  <h1>Mis à jour des étudiants</h1>
+  <br><br>
+  <mat-divider></mat-divider>
+  <br><br>
+  <form [formGroup]="updateStudentForm">
+    <!--    student name-->
+    <mat-form-field appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input
+        type="text"
+        name="name"
+        matInput
+        formControlName="name"
+        placeholder="name"
+      />
+      <mat-error *ngIf="name && name.invalid && name.touched">
+        <span *ngIf="name.hasError('réquis')">
+          nom réquis
+        </span>
+        <span *ngIf="name.hasError('minlength')">
+          minimum 3 character réquis
+        </span>
+        <span *ngIf="name.hasError('maxlength')">
+          maximum 20 character réquis
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <!--    roll-->
+    <mat-form-field appearance="fill">
+      <mat-label>Rôle n°</mat-label>
+      <input
+        type="number"
+        name="roll"
+        matInput
+        formControlName="roll"
+        placeholder="rôle no"
+        readonly
+      />
+      <mat-hint>roll no is not updatable</mat-hint>
+      <mat-error *ngIf="roll && roll.invalid && roll.touched">
+        <span *ngIf="roll.hasError('réquis')">rôle n° n est pas réquis</span>
+        <span *ngIf="roll.hasError('min')">minimum 6 caracteres réquis</span>
+        <span *ngIf="roll.hasError('max')">maximum 10 caracteres réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <!--    reg-->
+    <mat-form-field appearance="fill">
+      <mat-label>Reg n°</mat-label>
+      <input
+        type="number"
+        name="reg"
+        matInput
+        formControlName="reg"
+        placeholder="reg n°"
+      />
+      <mat-error *ngIf="reg && reg.invalid && reg.touched">
+        <span *ngIf="reg.hasError('réquis')">reg n° n est pas réquis</span>
+        <span *ngIf="reg.hasError('min')">minimum 6 caracteres réquis</span>
+        <span *ngIf="reg.hasError('max')">maximum 10 caracteres réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <!--    email-->
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input
+        type="text"
+        name="email"
+        matInput
+        formControlName="email"
+        placeholder="email"
+      />
+      <mat-error *ngIf="email && email.invalid && email.touched">
+        <span *ngIf="email.hasError('réquis')">
+          email réquis
+        </span>
+        <span *ngIf="email.hasError('email')">
+          email invalid 
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <!--    department-->
+    <mat-form-field appearance="fill">
+      <mat-label>Departement</mat-label>
+      <input
+        type="text"
+        name="department"
+        matInput
+        formControlName="department"
+        placeholder="departement"
+        [matAutocomplete]="deptSuggession"
+      />
+      <mat-autocomplete autoActiveFirstOption #deptSuggession="matAutocomplete">
+        <mat-option *ngFor="let dept of departments" [value]="dept">{{dept}}</mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="department && department.invalid && department.touched">
+        <span *ngIf="department.hasError('réquis')">
+          departement réquis
+        </span>
+        <span *ngIf="department.hasError('minlength')">
+          minimum 3 character réquis
+        </span>
+        <span *ngIf="department.hasError('maxlength')">
+          maximum 15 character réquis
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+    <!--    semester-->
+    <mat-form-field appearance="fill">
+      <mat-label>Semestre</mat-label>
+      <input
+        type="text"
+        name="semester"
+        matInput
+        formControlName="semester"
+        placeholder="Semestre"
+        [matAutocomplete]="semesterSuggession"
+      />
+      <mat-autocomplete autoActiveFirstOption #semesterSuggession="matAutocomplete">
+        <mat-option *ngFor="let seme of semesters" [value]="seme">{{seme}}</mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="semester && semester.invalid && semester.touched">
+        <span *ngIf="semester.hasError('réquis')">
+          Semestre réquis
+        </span>
+        <span *ngIf="semester.hasError('minlength')">
+          minimum 3 character is réquis
+        </span>
+        <span *ngIf="semester.hasError('maxlength')">
+          maximum 10 character is réquis
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <!--    submit-->
+    <button mat-raised-button
+            type="button"
+            [disabled]="updateStudentForm.invalid"
+            (click)="onSubmit(updateStudentForm.value)"
+            color="primary">Sauvegarder
+    </button>
+
+  </form>
+</div>
+<div class="loading" *ngIf="isLoading && studentId && (student == null)">
+  <br><br><br><br>
+  <mat-spinner color="primary"></mat-spinner>
+</div>
+<div class="emptyStudent" *ngIf="!isLoading && (studentId != null) && (student == null)">
+  <br><br>
+  <h1>etudiant introuvable</h1>
+  <mat-divider></mat-divider>
+  <br><br><br><br>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="goToAllStudentsPage()">
+    Afficher les etudiants disponibles</button>
+</div>

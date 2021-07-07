@@ -1,0 +1,186 @@
+<div class="container" *ngIf="!isSubmitted">
+  <h1 align="center">Entrez le resultat des informations</h1>
+  <mat-divider></mat-divider>
+  <br><br>
+  <form [formGroup]="addResultForm">
+<!--    id-->
+<!--    roll-->
+    <mat-form-field appearance="fill">
+      <mat-label>Rôle des etudiants</mat-label>
+      <input
+        type="number"
+        name="roll"
+        matInput
+        formControlName="roll"
+        placeholder="roll no"
+      />
+      <mat-error *ngIf="roll && roll.invalid && roll.touched">
+        <span *ngIf="roll.hasError('required')">rôle n est pas réquis</span>
+        <span *ngIf="roll.hasError('min')">minimum 6 caracteres réquis</span>
+        <span *ngIf="roll.hasError('max')">maximum 10 caracteres réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    bangla-->
+    <mat-form-field appearance="fill">
+      <mat-label>Bamako result</mat-label>
+      <input
+        type="number"
+        name="bangla"
+        matInput
+        formControlName="bangla"
+        placeholder="bamako"
+      />
+      <mat-error *ngIf="bangla && bangla.invalid && bangla.touched">
+        <span *ngIf="bangla.hasError('required')">note réquis</span>
+        <span *ngIf="bangla.hasError('min')">minimum 0 réquis</span>
+        <span *ngIf="bangla.hasError('max')">maximum 100 réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    english-->
+    <mat-form-field appearance="fill">
+      <mat-label>resultat anglais</mat-label>
+      <input
+        type="number"
+        name="english"
+        matInput
+        formControlName="english"
+        placeholder="resultat anglais"
+      />
+      <mat-error *ngIf="english && english.invalid && english.touched">
+        <span *ngIf="english.hasError('required')">note réquis</span>
+        <span *ngIf="english.hasError('min')">minimum 0 réquis</span>
+        <span *ngIf="english.hasError('max')">maximum 100 réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    math-->
+    <mat-form-field appearance="fill">
+      <mat-label>Math result</mat-label>
+      <input
+        type="number"
+        name="math"
+        matInput
+        formControlName="math"
+        placeholder="math resultat"
+      />
+      <mat-error *ngIf="math && math.invalid && math.touched">
+        <span *ngIf="math.hasError('required')">note réquis</span>
+        <span *ngIf="math.hasError('min')">minimum 0 réquis</span>
+        <span *ngIf="math.hasError('max')">maximum 100 réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    computer-->
+    <mat-form-field appearance="fill">
+      <mat-label>Informatique resultat</mat-label>
+      <input
+        type="number"
+        name="computer"
+        matInput
+        formControlName="computer"
+        placeholder="Informatique resultat"
+      />
+      <mat-error *ngIf="computer && computer.invalid && computer.touched">
+        <span *ngIf="computer.hasError('required')">note réquis</span>
+        <span *ngIf="computer.hasError('min')">minimum 0 réquis</span>
+        <span *ngIf="computer.hasError('max')">maximum 100 réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    physics-->
+    <mat-form-field appearance="fill">
+      <mat-label>Physique resultat</mat-label>
+      <input
+        type="number"
+        name="physics"
+        matInput
+        formControlName="physics"
+        placeholder="Physique resultat"
+      />
+      <mat-error *ngIf="physics && physics.invalid && physics.touched">
+        <span *ngIf="physics.hasError('required')">note réquis</span>
+        <span *ngIf="physics.hasError('min')">minimum 0 réquis</span>
+        <span *ngIf="physics.hasError('max')">maximum 100 réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    chemistry-->
+    <mat-form-field appearance="fill">
+      <mat-label>Chimie resultat</mat-label>
+      <input
+        type="number"
+        name="chemistry"
+        matInput
+        formControlName="chemistry"
+        placeholder="Chimie resultat"
+      />
+      <mat-error *ngIf="chemistry && chemistry.invalid && chemistry.touched">
+        <span *ngIf="chemistry.hasError('required')">note is réquis</span>
+        <span *ngIf="chemistry.hasError('min')">minimum 0 réquis</span>
+        <span *ngIf="chemistry.hasError('max')">maximum 100 réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    biology-->
+    <mat-form-field appearance="fill">
+      <mat-label>Biologie resultat</mat-label>
+      <input
+        type="number"
+        name="biology"
+        matInput
+        formControlName="biology"
+        placeholder="Biologie resultat"
+      />
+      <mat-error *ngIf="biology && biology.invalid && biology.touched">
+        <span *ngIf="biology.hasError('required')">note réquis</span>
+        <span *ngIf="biology.hasError('min')">minimum 0 réquis</span>
+        <span *ngIf="biology.hasError('max')">maximum 100 réquis</span>
+      </mat-error>
+    </mat-form-field>
+    <br><br>
+
+<!--    submit button-->
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="addResultForm.invalid"
+      (click)="onSubmit(addResultForm.value)">
+      Submit
+    </button>
+  </form>
+  <br><br><br><br><br>
+</div>
+<div class="failed" *ngIf="isFailed && !isSucceed && isSubmitted && feedbackMessage">
+  <br>
+  <h1 align="center">Adding result failed</h1>
+  <h1 align="center">{{feedbackMessage}}</h1>
+  <mat-divider></mat-divider>
+  <br><br><br>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="refreshPage()">
+    Réessayer
+  </button>
+</div>
+<div class="success" *ngIf="isSucceed && isSubmitted">
+  <br><br>
+  <h1 align="center">{{feedbackMessage}}</h1>
+  <mat-divider></mat-divider>
+  <br><br>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="refreshPage()">
+    Ajouter un autre
+  </button>
+</div>
